@@ -10,15 +10,12 @@ public class Simulator {
         BufferedReader reader = new BufferedReader(fr);
         String commands = reader.readLine();
 
-        String[] plateauSize = Util.splitStringWithBlank(commands);
-        Plateau plateau = new Plateau(Integer.parseInt(plateauSize[0]), Integer.parseInt(plateauSize[0]));
 
         while ((commands = reader.readLine()) != null) {
             String[] marsRoverInitInfo = Util.splitStringWithBlank(commands);
             Position position = new Position(Integer.parseInt(marsRoverInitInfo[0]), Integer.parseInt(marsRoverInitInfo[1]));
             Direction direction = Direction.valueOf(marsRoverInitInfo[2]);
             MarsRover marsRover = new MarsRover(position, direction);
-            marsRover.jumpToPlateau(plateau);
             commands = reader.readLine();
 
             CommandFactory commandFactory = new CommandFactory(marsRover);
