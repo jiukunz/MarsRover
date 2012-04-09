@@ -33,14 +33,5 @@ public class MarsRover {
     public void goAhead() {
             this.curPosition = this.curPosition.nextPosition(this.curDirection);
     }
-
-
-    public void status() {
-        System.out.println(
-                this.curPosition.getxCoord() +
-                        " " + this.curPosition.getyCoord() +
-                        " " + this.curDirection
-        );
-    }
 }
 
