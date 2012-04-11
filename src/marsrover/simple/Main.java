@@ -1,10 +1,9 @@
 package marsrover.simple;
 
-import java.io.IOException;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Simulator simulator = new Simulator();
-        simulator.run();
+        simulator.shuRuDaoShuChu("cmd.txt");
     }
 }

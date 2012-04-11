@@ -1,6 +1,6 @@
 package marsrover.simple;
 
-public abstract class Command  {
+public abstract class Command {
     protected MarsRover marsRover;
 
     protected Command(MarsRover marsRover) {

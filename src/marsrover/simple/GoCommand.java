@@ -1,8 +1,8 @@
 package marsrover.simple;
 
-public class GoAheadCommand extends Command {
+public class GoCommand extends Command {
 
-    protected GoAheadCommand(MarsRover marsRover) {
+    protected GoCommand(MarsRover marsRover) {
         super(marsRover);
     }
 

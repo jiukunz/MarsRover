@@ -1,6 +1,5 @@
 package marsrover.simple;
 
-import marsrover.simple.Direction;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,25 +15,25 @@ public class DirectionTest {
 
     @Test
     public void should_turn_left() {
-        direction = direction.turnLeft();
+        direction = direction.left();
         assertEquals(Direction.W, direction);
-        direction = direction.turnLeft();
+        direction = direction.left();
         assertEquals(Direction.S, direction);
-        direction = direction.turnLeft();
+        direction = direction.left();
         assertEquals(Direction.E, direction);
-        direction = direction.turnLeft();
+        direction = direction.left();
         assertEquals(Direction.N, direction);
     }
 
     @Test
     public void should_turn_right() {
-        direction = direction.turnRight();
+        direction = direction.right();
         assertEquals(Direction.E, direction);
-        direction = direction.turnRight();
+        direction = direction.right();
         assertEquals(Direction.S, direction);
-        direction = direction.turnRight();
+        direction = direction.right();
         assertEquals(Direction.W, direction);
-        direction = direction.turnRight();
+        direction = direction.right();
         assertEquals(Direction.N, direction);
     }
 

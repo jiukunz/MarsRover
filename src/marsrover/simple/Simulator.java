@@ -1,44 +1,43 @@
 package marsrover.simple;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.util.ArrayList;
 
 public class Simulator {
-    public void run() throws IOException {
-        FileReader fr = new FileReader("./cmd.txt");
-        BufferedReader reader = new BufferedReader(fr);
-        String commands = reader.readLine();
-        while ((commands = reader.readLine()) != null) {
-            MarsRover marsRover = initMarsRoverWithCommand(commands);
-            commands = reader.readLine();
-            letMarsRoverExecuteCommand(commands, marsRover);
-            displayMarsRoverStatus(marsRover);
-        }
-        reader.close();
-    }
+    private MarsRoverFactory marsRoverFactory = new MarsRoverFactory();
 
-    private void displayMarsRoverStatus(MarsRover marsRover) {
-        System.out.println(
-                marsRover.getCurPosition().getxCoord() +
-                        " " + marsRover.getCurPosition().getyCoord() +
-                        " " + marsRover.getCurDirection()
-        );
-    }
-
-    private void letMarsRoverExecuteCommand(String commands, MarsRover marsRover) {
-        CommandFactory commandFactory = new CommandFactory(marsRover);
-        commandFactory.initial();
-        for (char c : commands.toCharArray()) {
-            Command command = commandFactory.createCommand(c);
-            marsRover.executeCommand(command);
+    public void shuRuDaoShuChu(String filePath) {
+        ArrayList<String> messageList = Util.readMessagesFromFile(filePath);
+        for (int i = 1; i < messageList.size(); i += 2) {
+            String output = simulate(messageList.get(i), messageList.get(i + 1));
+            System.out.println(output);
         }
     }
 
-    private MarsRover initMarsRoverWithCommand(String commands) {
-        String[] marsRoverInitInfo = Util.splitStringWithBlank(commands);
-        Position position = new Position(Integer.parseInt(marsRoverInitInfo[0]), Integer.parseInt(marsRoverInitInfo[1]));
-        Direction direction = Direction.valueOf(marsRoverInitInfo[2]);
-        return new MarsRover(position, direction);
+    private String simulate(String initMessage, String commandListMessage) {
+        MarsRover marsRover = this.marsRoverFactory.createMarsRover(initMessage);
+        ArrayList<Command> commandList = createCommandList(commandListMessage, marsRover);
+        invokeCommandList(commandList);
+        return marsRover.status();
+    }
+
+    private void invokeCommandList(ArrayList<Command> commandList) {
+        Invoker invoker = new Invoker();
+        invoker.setCommandList(commandList);
+        invoker.execute();
+    }
+
+    private ArrayList<Command> createCommandList(String commandListMessage, MarsRover receiver) {
+        CommandFactory commandFactory = new CommandFactory(receiver);
+        return createCommandList(commandListMessage, commandFactory);
+    }
+
+    public static ArrayList<Command> createCommandList(String commandListMessage, CommandFactory commandFactory) {
+
+        ArrayList<Command> commandList = new ArrayList<Command>();
+        for (Character commandText : commandListMessage.toCharArray()) {
+            Command command = commandFactory.createCommand(commandText);
+            commandList.add(command);
+        }
+        return commandList;
     }
 }

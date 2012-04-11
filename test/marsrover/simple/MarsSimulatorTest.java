@@ -10,7 +10,7 @@ public class MarsSimulatorTest {
     public void should_build_the_environment_of_mars() throws Exception {
         MessageReceiver messageReceiver = new MessageReceiver();
         MarsSimulator marsSimulator = new MarsSimulator();
-        marsSimulator.update(messageReceiver.readMessagesFromFile("./cmd.txt"));
+        marsSimulator.createScene(messageReceiver.readMessagesFromFile("./cmd.txt"));
 
         assertThat(marsSimulator.getPlateauLength(),is(5));
         assertThat(marsSimulator.getPlateauWidth(),is(5));
