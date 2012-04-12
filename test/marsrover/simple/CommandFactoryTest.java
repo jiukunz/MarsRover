@@ -10,7 +10,6 @@ public class CommandFactoryTest {
 
         MarsRover marsRover = new MarsRover(new Position(3,5),Direction.N);
         CommandFactory commandFactory = new CommandFactory(marsRover);
-        commandFactory.initial();
 
         char left = 'L';
         char right = 'R';
@@ -18,6 +17,6 @@ public class CommandFactoryTest {
 
         assertEquals(true,commandFactory.createCommand(left) instanceof TurnLeftCommand);
         assertEquals(true,commandFactory.createCommand(right) instanceof TurnRightCommand);
-        assertEquals(true,commandFactory.createCommand(goAhead) instanceof GoAheadCommand);
+        assertEquals(true,commandFactory.createCommand(goAhead) instanceof GoCommand);
     }
 }

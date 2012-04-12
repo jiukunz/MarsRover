@@ -8,6 +8,6 @@ public class GoCommand extends Command {
 
     @Override
     public void execute() {
-        marsRover.goAhead();
+        marsRover.goForward();
     }
 }

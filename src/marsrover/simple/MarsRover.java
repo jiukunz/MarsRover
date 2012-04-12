@@ -11,16 +11,19 @@ public class MarsRover {
         this.curDirection = curDirection;
     }
 
-    public void turnLeft() {
+    public Direction turnLeft() {
         this.curDirection = this.curDirection.left();
+        return this.curDirection;
     }
 
-    public void turnRight() {
+    public Direction turnRight() {
         this.curDirection = this.curDirection.right();
+        return this.curDirection;
     }
 
-    public void goAhead() {
+    public Position goForward() {
         this.curPosition = this.curPosition.nextPosition(this.curDirection);
+        return this.curPosition;
     }
 
 

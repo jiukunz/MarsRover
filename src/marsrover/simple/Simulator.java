@@ -5,12 +5,14 @@ import java.util.ArrayList;
 public class Simulator {
     private MarsRoverFactory marsRoverFactory = new MarsRoverFactory();
 
-    public void shuRuDaoShuChu(String filePath) {
+    public String shuRuDaoShuChu(String filePath) {
+        StringBuilder output = new StringBuilder();
         ArrayList<String> messageList = Util.readMessagesFromFile(filePath);
         for (int i = 1; i < messageList.size(); i += 2) {
-            String output = simulate(messageList.get(i), messageList.get(i + 1));
-            System.out.println(output);
+            output.append(simulate(messageList.get(i), messageList.get(i + 1)));
+            output.append("\n");
         }
+        return output.toString();
     }
 
     private String simulate(String initMessage, String commandListMessage) {
