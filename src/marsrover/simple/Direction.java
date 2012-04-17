@@ -1,7 +1,6 @@
 package marsrover.simple;
 
 public enum Direction {
-    //ToDo:Transform String Type to Enum.How To Do That?
     N("W", "E", new Position(0, 1)),
     E("N", "S", new Position(1, 0)),
     S("E", "W", new Position(0, -1)),
@@ -29,5 +28,4 @@ public enum Direction {
     public Position getExtraPosition() {
         return this.extraPosition;
     }
-
 }

@@ -10,7 +10,7 @@ public class MarsRoverFactoryTest {
     public void should_return_marsrover_with_init_message() {
         String initMessage = "5 5 N";
         MarsRoverFactory marsRoverFactory = new MarsRoverFactory();
-        MarsRover marsRover = marsRoverFactory.createMarsRover(initMessage);
+        MarsRover marsRover = marsRoverFactory.create(initMessage);
 
         assertThat(marsRover.status(),is("5 5 N"));
     }

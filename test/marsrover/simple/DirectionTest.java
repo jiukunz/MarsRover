@@ -6,35 +6,21 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class DirectionTest {
-    private Direction direction;
 
-    @Before
-    public void setUp() {
-        direction = Direction.N;
+    @Test
+    public void should_get_left_direction() {
+        assertEquals(Direction.W.left(), Direction.S);
+        assertEquals(Direction.S.left(), Direction.E);
+        assertEquals(Direction.E.left(), Direction.N);
+        assertEquals(Direction.N.left(), Direction.W);
     }
 
     @Test
-    public void should_turn_left() {
-        direction = direction.left();
-        assertEquals(Direction.W, direction);
-        direction = direction.left();
-        assertEquals(Direction.S, direction);
-        direction = direction.left();
-        assertEquals(Direction.E, direction);
-        direction = direction.left();
-        assertEquals(Direction.N, direction);
-    }
-
-    @Test
-    public void should_turn_right() {
-        direction = direction.right();
-        assertEquals(Direction.E, direction);
-        direction = direction.right();
-        assertEquals(Direction.S, direction);
-        direction = direction.right();
-        assertEquals(Direction.W, direction);
-        direction = direction.right();
-        assertEquals(Direction.N, direction);
+    public void should_get_right_direction() {
+        assertEquals(Direction.W.right(), Direction.N);
+        assertEquals(Direction.S.right(), Direction.W);
+        assertEquals(Direction.E.right(), Direction.S);
+        assertEquals(Direction.N.right(), Direction.E);
     }
 
 }

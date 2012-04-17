@@ -2,16 +2,25 @@ package marsrover.simple;
 
 import org.junit.Test;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class SimulatorTest {
     @Test
-    public void should_return_output_when_give_input_file_path() {
+    public void should_return_output_when_give_input_file_path() throws IOException {
+        List<String> inputMessageList = new ArrayList<String>();
+        inputMessageList.add("5 5");
+        inputMessageList.add("1 2 N");
+        inputMessageList.add("LMLMLMLMM");
         Simulator simulator = new Simulator();
         
-        String output = simulator.shuRuDaoShuChu("cmd.txt");
+        List<String> outputMessageList = simulator.process(inputMessageList);
 
-        assertThat(output,is("1 3 N\n" + "5 1 E\n" + "2 3 W\n"));
+        assertEquals(outputMessageList.get(0),"1 3 N");
     }
 }

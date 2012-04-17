@@ -1,38 +1,35 @@
 package marsrover.simple;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.io.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class Util {
-    public static String[] splitStringWithBlank(String command) {
-        return command.split("\\s");
+    public static String[] splitStringWithBlank(String string) {
+        return string.split("\\s");
     }
 
-    //ToDo:Method is too long
-    public static ArrayList<String> readMessagesFromFile(String filePath) {
-        FileReader fileReader = null;
-        try {
-            fileReader = new FileReader(filePath);
-        } catch (FileNotFoundException e) {
-            System.out.println("Input file is not found.");
-            System.exit(-1);
-        }
-        BufferedReader reader = new BufferedReader(fileReader);
+    public static List<String> readMessagesFromReader(Reader reader) {
+        String message = readFileToString(reader);
+        String[] strings = splitStringWithLine(message);
 
-        ArrayList<String> messageList = new ArrayList<String>();
-        String message;
+        List<String> arrayList = Arrays.asList(strings);
+
+        return arrayList;
+    }
+
+    private static String readFileToString(Reader reader) {
+        char[] buffer = new char[256];
         try {
-            while ((message = reader.readLine()) != null) {
-                messageList.add(message);
-            }
-            reader.close();
-            fileReader.close();
+            reader.read(buffer);
         } catch (IOException e) {
             e.printStackTrace();
+            System.exit(-1);
         }
-        return messageList;
+        return String.valueOf(buffer).trim();
+    }
+
+    private static String[] splitStringWithLine(String string) {
+        return string.split("\\r\\n");
     }
 }

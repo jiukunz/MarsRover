@@ -1,7 +1,7 @@
 package marsrover.simple;
 
 public class MarsRoverFactory {
-    public MarsRover createMarsRover(String initMessage) {
+    public MarsRover create(String initMessage) {
         String[] marsRoverInitConfig = Util.splitStringWithBlank(initMessage);
         int xCoord = Integer.parseInt(marsRoverInitConfig[0]);
         int yCoord = Integer.parseInt(marsRoverInitConfig[1]);

@@ -9,7 +9,6 @@ public class Invoker {
         this.commandList = commandList;
     }
 
-
     public void execute() {
         for (Command command : commandList) {
             command.execute();

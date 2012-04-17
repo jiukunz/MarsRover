@@ -1,6 +1,5 @@
 package marsrover.simple;
 
-
 public class MarsRover {
 
     private Position curPosition;
@@ -25,7 +24,6 @@ public class MarsRover {
         this.curPosition = this.curPosition.nextPosition(this.curDirection);
         return this.curPosition;
     }
-
 
     public String status() {
         return this.curPosition.getxCoord() +

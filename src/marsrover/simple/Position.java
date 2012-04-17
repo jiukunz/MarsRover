@@ -1,6 +1,5 @@
 package marsrover.simple;
 
-
 public class Position {
 
     private int xCoord;

@@ -12,26 +12,26 @@ public class MarsRoverTest {
     public void should_return_left_direction_after_marsrover_turn_left(){
         MarsRover marsRover = new MarsRover(new Position(3,6),Direction.E);
 
-        assertEquals(marsRover.turnLeft(),Direction.N);
-        assertEquals(marsRover.turnLeft(),Direction.W);
-        assertEquals(marsRover.turnLeft(),Direction.S);
-        assertEquals(marsRover.turnLeft(),Direction.E);
+        marsRover.turnLeft();
+
+        assertEquals(marsRover.status(),"3 6 N");
     }
 
     @Test
     public void should_return_right_direction_after_marsrover_turn_right(){
         MarsRover marsRover = new MarsRover(new Position(3,6),Direction.E);
 
-        assertEquals(marsRover.turnRight(),Direction.S);
-        assertEquals(marsRover.turnRight(),Direction.W);
-        assertEquals(marsRover.turnRight(),Direction.N);
-        assertEquals(marsRover.turnRight(), Direction.E);
+        marsRover.turnRight();
+
+        assertEquals(marsRover.status(),"3 6 S");
     }
 
     @Test
     public void should_return_foward_position_after_marsrover_go_forward() {
         MarsRover marsRover = new MarsRover(new Position(3,6),Direction.E);
 
-        assertThat(marsRover.goForward().getxCoord(),is(4));
+        marsRover.goForward();
+
+        assertEquals(marsRover.status(),"4 6 E");
     }
 }

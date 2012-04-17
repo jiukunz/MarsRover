@@ -1,40 +1,49 @@
 package marsrover.simple;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Simulator {
     private MarsRoverFactory marsRoverFactory = new MarsRoverFactory();
+    private List<String> reportList = new ArrayList<String>();
 
-    public String shuRuDaoShuChu(String filePath) {
-        StringBuilder output = new StringBuilder();
-        ArrayList<String> messageList = Util.readMessagesFromFile(filePath);
-        for (int i = 1; i < messageList.size(); i += 2) {
-            output.append(simulate(messageList.get(i), messageList.get(i + 1)));
-            output.append("\n");
+    public void report() {
+        for (String message : reportList){
+            System.out.println(message);
         }
-        return output.toString();
+    }
+
+    public List<String> process(List<String> inputMessageList) {
+        for (int i = 1; i < inputMessageList.size(); i += 2) {
+            reportList.add(simulate(inputMessageList.get(i), inputMessageList.get(i + 1)));
+        }
+
+        return reportList;
     }
 
     private String simulate(String initMessage, String commandListMessage) {
-        MarsRover marsRover = this.marsRoverFactory.createMarsRover(initMessage);
+        MarsRover marsRover = marsRoverFactory.create(initMessage);
         ArrayList<Command> commandList = createCommandList(commandListMessage, marsRover);
+
         invokeCommandList(commandList);
+
         return marsRover.status();
     }
 
     private void invokeCommandList(ArrayList<Command> commandList) {
         Invoker invoker = new Invoker();
+
         invoker.setCommandList(commandList);
         invoker.execute();
     }
 
     private ArrayList<Command> createCommandList(String commandListMessage, MarsRover receiver) {
         CommandFactory commandFactory = new CommandFactory(receiver);
-        return createCommandList(commandListMessage, commandFactory);
+
+        return this.createCommandList(commandListMessage, commandFactory);
     }
 
-    public static ArrayList<Command> createCommandList(String commandListMessage, CommandFactory commandFactory) {
-
+    private ArrayList<Command> createCommandList(String commandListMessage, CommandFactory commandFactory) {
         ArrayList<Command> commandList = new ArrayList<Command>();
         for (Character commandText : commandListMessage.toCharArray()) {
             Command command = commandFactory.createCommand(commandText);
